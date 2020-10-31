@@ -43,9 +43,9 @@ class UserDf:
 
     def make_wordcloud(self):
         
-        item_data = pd.read_csv("com_cheese_api/resources/data/users.csv")
-        item_df = item_data.loc[:,['cheese_name']]
-        item_lists = np.array(item_df['cheese_name'].tolist())
+        _data = pd.read_csv("com_cheese_api/resources/data/users.csv")
+        _df = _data.loc[:,['cheese_name']]
+        _lists = np.array(_df['cheese_name'].tolist())
                 
         with open('com_cheese_api/user/data/stopword.txt', 'r') as file:
             lines = file.readlines()
@@ -56,7 +56,7 @@ class UserDf:
         sentences_tag = []
         
         #형태소 분석하여 리스트에 넣기
-        for sentence in item_lists:
+        for sentence in _lists:
             morph = self.okt.pos(sentence)
             sentences_tag.append(morph)
             #print(morph)
@@ -98,37 +98,37 @@ class UserDf:
     #make_wordcloud()
 
 def change_list() :
-        top_item = (['비타민', '김치', '삼다수', '풀무원', '생수', '제주', '홍삼', '유산균', '캡슐', '훈제', '증정', '사과', '쇼핑', '큐브', '락토핏', '고려', '은단', '야채', '밸런스', '라이트', '홍진경', '선물', '간편', '플러스', '스테이크', '도시락', '롯데', '곤약', '멀티', '콜라겐', '라이프','견과', '두유', '오메가', '네슬레', '아셉틱', '퓨어', '소시지', '청양고추', '칼슘', '젤리', '시래기', '솥밥', '표고버섯', '프리미엄', '건강', '포도', '우먼', '스틱', '종근당', '포장', '석류', '주스', '하루', '실속', '불고기', '만두', '백화점', '키즈', '자연', '볶음', '모음', '미니', '낱봉', '호두', '라이스', '마그네슘', '혼합', '루테', '영양', '볶음밥', '리지', '워터', '버섯', '샘물', '유기농', '아몬드', '계란', '간장','수제', '안국', '미네랄', '포맨', '노니', '정환', '에너지', '코어', '매콤', '실버', '굿데이', '견과류', '안심', '프로','밀크', '꼬치','테일러','식이섬유', '땅콩','가야','베이스'])
-        #print(type(top_item))
-        #print(top_item)
+        top_ = (['비타민', '김치', '삼다수', '풀무원', '생수', '제주', '홍삼', '유산균', '캡슐', '훈제', '증정', '사과', '쇼핑', '큐브', '락토핏', '고려', '은단', '야채', '밸런스', '라이트', '홍진경', '선물', '간편', '플러스', '스테이크', '도시락', '롯데', '곤약', '멀티', '콜라겐', '라이프','견과', '두유', '오메가', '네슬레', '아셉틱', '퓨어', '소시지', '청양고추', '칼슘', '젤리', '시래기', '솥밥', '표고버섯', '프리미엄', '건강', '포도', '우먼', '스틱', '종근당', '포장', '석류', '주스', '하루', '실속', '불고기', '만두', '백화점', '키즈', '자연', '볶음', '모음', '미니', '낱봉', '호두', '라이스', '마그네슘', '혼합', '루테', '영양', '볶음밥', '리지', '워터', '버섯', '샘물', '유기농', '아몬드', '계란', '간장','수제', '안국', '미네랄', '포맨', '노니', '정환', '에너지', '코어', '매콤', '실버', '굿데이', '견과류', '안심', '프로','밀크', '꼬치','테일러','식이섬유', '땅콩','가야','베이스'])
+        #print(type(top_))
+        #print(top_)
 
-        item_data = pd.read_csv("com_cheese_api/resources/data/users.csv")
-        item_df = item_data.loc[:,['cheese_name']]
-        item_lists = np.array(item_df['cheese_name'].tolist())
-        #print(type(item_lists))
+        _data = pd.read_csv("com_cheese_api/resources/data/users.csv")
+        _df = _data.loc[:,['cheese_name']]
+        _lists = np.array(_df['cheese_name'].tolist())
+        #print(type(_lists))
 
         cheese_data = pd.read_csv("com_cheese_api/resources/data/cheese_data.csv")
         cheese_df = cheese_data.loc[:,['name']]
         cheese_lists = np.array(cheese_df['name']).tolist()
         #print(cheese_lists)
 
-        for item_list in item_lists:
-            for item_num in range(len(item_lists)):
-                if item_list in top_item:
-                    change_value_dict = {item_list[item_num]: cheese_lists[item_num]}
-                    change_item_data = item_data.replace({'cheese_name': change_value_dict})
-                    print(change_item_data)
+        for _list in _lists:
+            for _num in range(len(_lists)):
+                if _list in top_:
+                    change_value_dict = {_list[_num]: cheese_lists[_num]}
+                    change__data = _data.replace({'cheese_name': change_value_dict})
+                    print(change__data)
                 else:
                     break
 
 def change_category() :
     
-    item_data = pd.read_csv("com_cheese_api/resources/data/users.csv")
-    item_df = item_data.loc[:,['sub1_category']]
-    item_lists = np.array(item_df['sub1_category'].tolist())
-    #print(type(item_lists))
+    _data = pd.read_csv("com_cheese_api/resources/data/users.csv")
+    _df = _data.loc[:,['sub1_category']]
+    _lists = np.array(_df['sub1_category'].tolist())
+    #print(type(_lists))
 
-    rank_category = item_data['sub1_category'].value_counts()
+    rank_category = _data['sub1_category'].value_counts()
     categories = np.array(rank_category.index).tolist()
 
     cheese_data = pd.read_csv("com_cheese_api/resources/data/cheese_data.csv")
@@ -141,9 +141,9 @@ def change_category() :
                         '포장반찬' : '고다', '건강진액' : '에멘탈', '건강보조식품' : '까망베르', '국산과일' : '부라타',\
                             '두유' : '만체고', '기능성음료' : '부라타', '축산선물세트' : '까망베르' }
 
-    for item_list in range(len(item_lists)):
-        item_df = item_data.replace({'sub1_category': match_value})
-    print(item_df)
+    for _list in range(len(_lists)):
+        _df = _data.replace({'sub1_category': match_value})
+    print(_df)
 
 def data_split ():
     users = pd.read_csv("com_cheese_api/resources/data/users.csv")
@@ -189,9 +189,9 @@ def category_ordinal(this) -> object:
         9 : '만체고'
     }
 
-    for x in range(len(item_df['sub1_category'])):
-        if item_df['sub1_category'][x] == '모짜렐라':
-            item_df['sub1_category'][x] == category_title_mapping[item_df['Title'][x]]
+    for x in range(len(_df['sub1_category'])):
+        if _df['sub1_category'][x] == '모짜렐라':
+            _df['sub1_category'][x] == category_title_mapping[_df['Title'][x]]
 
     category_mapping = {
         0 : '모짜렐라',
@@ -206,7 +206,7 @@ def category_ordinal(this) -> object:
         9 : '만체고'
     }
 
-    item_df['sub1_category'] = item_df['sub1_category'].map(category_mapping)
+    _df['sub1_category'] = _df['sub1_category'].map(category_mapping)
 
     return this
 # ==============================================================

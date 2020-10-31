@@ -1,5 +1,5 @@
 from com_emp_api.ext.db import db, openSession
-from com_emp_api.item.service import ItemService
+from com_emp_api.cheese.service import cheeseService
 import pandas as pd
 import json
 from com_emp_api.ext.db import db
@@ -58,11 +58,11 @@ class CheeseSplit():
 # =======================                =======================
 # ==============================================================
 
-class ItemDto(db.Model):
-    __tablename__='items'
+class cheeseDto(db.Model):
+    __tablename__='cheeses'
     __table_args__={'mysql_collate':'utf8_general_ci'}
 
-    itemid : int = db.Column(db.Integer, primary_key=True, index=True)
+    cheeseid : int = db.Column(db.Integer, primary_key=True, index=True)
     name : str = db.Column(db.String(30))
     price : str = db.Column(db.String(30))
     types : str = db.Column(db.String(30))
@@ -72,11 +72,11 @@ class ItemDto(db.Model):
     content : str = db. Column(db.String(30))
 
     #dairy = db.relationship('DiaryDto', lazy='dynamic')
-    orders = db.relationship('OrderDto', back_populates='item', lazy='dynamic')
-    prices = db.relationship('PriceDto', back_populates='item', lazy='dynamic')
+    orders = db.relationship('OrderDto', back_populates='cheese', lazy='dynamic')
+    prices = db.relationship('PriceDto', back_populates='cheese', lazy='dynamic')
 
-    def __init__(self, itemid, name, price, types, texture, taste, matching, content) : 
-        self.id = itemid
+    def __init__(self, cheeseid, name, price, types, texture, taste, matching, content) : 
+        self.id = cheeseid
         self.name = name
         self.price = price
         self.types = types
@@ -86,11 +86,11 @@ class ItemDto(db.Model):
         self.content = content
 
     def __repr__(self):
-        return f'Item(itemid={self.itemid}, name={self.name}, price={self.price}, types={self.types}, texture={self.texture}, taste={self.taste}, matching={self.matching}, content={self.content})'
+        return f'cheese(cheeseid={self.cheeseid}, name={self.name}, price={self.price}, types={self.types}, texture={self.texture}, taste={self.taste}, matching={self.matching}, content={self.content})'
 
     @property
     def json(self):
-        return {'itemid':self.itemid, 'name':self.name, 'price':self.price, 'types':self.types, 'texture':self.types, 'taste':self.types, 'matching':self.types, 'content':self.content}
+        return {'cheeseid':self.cheeseid, 'name':self.name, 'price':self.price, 'types':self.types, 'texture':self.types, 'taste':self.types, 'matching':self.types, 'content':self.content}
 
     def save(self):
         db.session.add(self)
@@ -101,15 +101,15 @@ class ItemDto(db.Model):
         db.session.commit()   
 
 # getter setter를 프론트 단에서 받아옴 
-class ItemDao(ItemDto):
+class cheeseDao(cheeseDto):
     
     @classmethod
     def find_all(cls):
         sql = cls.query.all()
 
     @classmethod
-    def find_by_itemid(cls, itemid) :
-        return cls.query.file_by(itemid == itemid).all()
+    def find_by_cheeseid(cls, cheeseid) :
+        return cls.query.file_by(cheeseid == cheeseid).all()
 
     @classmethod
     def find_by_brand(cls, brand) :
